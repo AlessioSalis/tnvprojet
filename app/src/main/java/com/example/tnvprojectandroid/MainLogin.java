@@ -119,7 +119,7 @@ public class MainLogin extends AppCompatActivity {
 
         this.poi.setCoordinata(coordinata);
 
-        //  this.poi.setCategoria(Categoria.valueOf(categoria.getText().toString()));
+       //  this.poi.setCategoria(Categoria.valueOf(categoria.getText().toString()));
 
     }
     */
