@@ -77,12 +77,12 @@ public class MainLogin extends AppCompatActivity {
         }else {
             utente = new Utente();
         }
-
+/*
         usernameInserita.setText(utente.getUsername());
         passwordInserita.setText(utente.getPassword());
         cittaInserita.setText(utente.getCittaDiProvenienza());
         dataInserita.setText(utente.getDataDiNascita());
-
+*/
     }
 
 
