@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +13,10 @@ import java.io.Serializable;
 
 import static com.example.tnvprojectandroid.Registrazione.packag;
 
-public class Home extends AppCompatActivity {
+public class Home_User extends AppCompatActivity {
 
-    TextView username,password,cittaDiProvenienza,dataDiNascita;
-    Button logout,modificaPassword;
+    TextView username, password, cittaDiProvenienza, dataDiNascita;
+    Button logout, modificaPassword;
     Utente utente;
 
     @Override
@@ -23,36 +24,36 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        username=findViewById(R.id.utente);
-        password=findViewById(R.id.password);
-        cittaDiProvenienza=findViewById(R.id.citta);
-        dataDiNascita=findViewById(R.id.dataDiNascita);
-        logout=findViewById(R.id.logout);
-        modificaPassword=findViewById(R.id.passwordChange);
+        username = findViewById(R.id.utente);
+        password = findViewById(R.id.password);
+        cittaDiProvenienza = findViewById(R.id.citta);
+        dataDiNascita = findViewById(R.id.dataDiNascita);
+        logout = findViewById(R.id.logout);
+        modificaPassword = findViewById(R.id.passwordChange);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  finish();
+                //  finish();
             }
         });
 
         modificaPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(Home.this,ModificaPassword.class);
+                Intent intent = new Intent(Home_User.this, ModificaPassword.class);
                 startActivity(intent);
             }
         });
 
 
-        Intent intent=getIntent();
-        Serializable object =intent.getSerializableExtra(packag);
+        Intent intent = getIntent();
+        Serializable object = intent.getSerializableExtra(packag);
 
-        if(object instanceof Utente){
+        if (object instanceof Utente) {
             utente = (Utente) object;
-        }else{
-            utente =new Utente();
+        } else {
+            utente = new Utente();
         }
 
         username.setText(utente.getUsername());

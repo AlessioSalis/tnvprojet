@@ -13,7 +13,7 @@ public class Registrazione extends AppCompatActivity {
     TextView username,password,passwordConfermata,cittaDiProvenienza,dataDiNascita;
     Utente utente;
     Button registazioneButton;
-    public final static String packag="com.example.tnvprojectandroid.Attributi";
+    public final static String packag="com.example.tnvprojectandroid.Utente";
 
 
     @Override
@@ -51,7 +51,7 @@ public class Registrazione extends AppCompatActivity {
     private void inizializzaAttributi()throws IllegalArgumentException{
         this.utente.setUsername(username.getText().toString());
         this.utente.setPassword(password.getText().toString());
-        this.utente.setConfermaPassowrd(passwordConfermata.getText().toString());
+        this.utente.setPassword(passwordConfermata.getText().toString());
         this.utente.setCittaDiProvenienza(cittaDiProvenienza.getText().toString());
         this.utente.setDataDiNascita(dataDiNascita.getText().toString());
     }

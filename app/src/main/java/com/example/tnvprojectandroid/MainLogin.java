@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import static com.example.tnvprojectandroid.Registrazione.packag;
 
@@ -32,21 +33,23 @@ public class MainLogin extends AppCompatActivity {
         password=findViewById(R.id.password);
         accedi=findViewById(R.id.accediButton);
         nuovaRegistrazione=findViewById(R.id.nuovaRegistrazione);
-     //   listaUtenti=findViewById(R.id.lista_utenti);
+      //  listaUtenti=findViewById(R.id.lista_utenti);
 
-     //   ArrayList<Utenti> listaUtentiInseriti= new ArrayList<>();
+     //   ArrayList<Utente> listaUtentiInseriti= new ArrayList<>();
 
-      //  utente =new Utente("admin","admin","admin","carpineto romano","15/06/1993");
+    //   utente =new Utente("admin","admin","carpineto romano","15/06/1993");
+
+      // listaUtentiInseriti.add(utente);
 
         accedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(controlloInserimento()) {
-                    Intent passaggioTraActivity=new Intent(MainLogin.this,Home.class);
-                    passaggioTraActivity.putExtra(packag, utente);
+           //     if(controlloInserimento()) {
+                    Intent passaggioTraActivity=new Intent(MainLogin.this,Home_User.class);
+                 //   passaggioTraActivity.putExtra(packag, utente);
                     startActivity(passaggioTraActivity);
                 }
-            }
+          //  }
         });
 
 
@@ -61,7 +64,7 @@ public class MainLogin extends AppCompatActivity {
 
         Intent intent=getIntent();
         Serializable object=intent.getSerializableExtra(packag);
-/*
+
         usernameInserita=findViewById(R.id.usernameInserito);
         passwordInserita=findViewById(R.id.passwordInserita);
         passwordConfermataInserita=findViewById(R.id.passwordConfermataInserita);
@@ -69,19 +72,17 @@ public class MainLogin extends AppCompatActivity {
         dataInserita=findViewById(R.id.dataDiNascitaInserita);
 
 
-        if(object instanceof Utenti) {
-            utenti = (Utenti) object;
+        if(object instanceof Utente) {
+            utente = (Utente) object;
         }else {
-            utenti = new Utenti();
+            utente = new Utente();
         }
 
+        usernameInserita.setText(utente.getUsername());
+        passwordInserita.setText(utente.getPassword());
+        cittaInserita.setText(utente.getCittaDiProvenienza());
+        dataInserita.setText(utente.getDataDiNascita());
 
-        usernameInserita.setText(utenti.getUsername());
-        passwordInserita.setText(utenti.getPassword());
-        passwordConfermataInserita.setText(utenti.getConfermaPassowrd());
-        cittaInserita.setText(utenti.getCittaDiProvenienza());
-        dataInserita.setText(utenti.getDataDiNascita());
-*/
     }
 
 
@@ -104,4 +105,23 @@ public class MainLogin extends AppCompatActivity {
         return errors==0;
 
     }
+/*
+    public void updatePOI() throws IllegalArgumentException{
+        this.utente.setUsername(usernameInserita.getText().toString());
+        this.poi.setDescrizione(descrizione.getText().toString());
+
+        Coordinata coordinata=new Coordinata(
+                Double.parseDouble(this.latitudine.getText().toString()),
+                Double.parseDouble(this.longitudine.getText().toString()),
+                Double.parseDouble(this.altitudineNumber.getText().toString())
+                // Double.parseDouble(this.altitudine.getText().toString())
+        );
+
+        this.poi.setCoordinata(coordinata);
+
+        //  this.poi.setCategoria(Categoria.valueOf(categoria.getText().toString()));
+
+    }
+    */
+
 }
