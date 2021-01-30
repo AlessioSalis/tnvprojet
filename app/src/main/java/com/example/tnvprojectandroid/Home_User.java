@@ -15,7 +15,7 @@ import static com.example.tnvprojectandroid.Registrazione.packag;
 
 public class Home_User extends AppCompatActivity {
 
-    TextView username, password, cittaDiProvenienza, dataDiNascita;
+    TextView username, password, cittaDiProvenienza, dataDiNascita,benVenuto;
     Button logout, modificaPassword;
     Utente utente;
 
@@ -24,12 +24,15 @@ public class Home_User extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        benVenuto=findViewById(R.id.benvenuto);
         username = findViewById(R.id.utente);
         password = findViewById(R.id.password);
         cittaDiProvenienza = findViewById(R.id.citta);
         dataDiNascita = findViewById(R.id.dataDiNascita);
         logout = findViewById(R.id.logout);
         modificaPassword = findViewById(R.id.passwordChange);
+
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +58,7 @@ public class Home_User extends AppCompatActivity {
         } else {
             utente = new Utente();
         }
-
+       benVenuto.setText("Benvenuto "+utente.getUsername()+"!");
         username.setText(utente.getUsername());
         password.setText(utente.getPassword());
         cittaDiProvenienza.setText(utente.getCittaDiProvenienza());

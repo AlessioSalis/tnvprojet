@@ -84,11 +84,11 @@
             android:textSize="30dp" />
 
         <EditText
+            android:id="@+id/cittaDiProvenienzaInserita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cittaDiProvenienzaInserita"
             android:hint="es:Roma,Napoli,Firenze"
-            android:textSize="26dp"/>
+            android:textSize="26dp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -113,11 +113,14 @@
 
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+
             android:gravity="center"
             android:backgroundTint="@color/green"
             android:text="Registrati"
+            android:textAllCaps="false"
+            android:layout_gravity="center"
             android:id="@+id/registrazioneButton"/>
 
     </LinearLayout>

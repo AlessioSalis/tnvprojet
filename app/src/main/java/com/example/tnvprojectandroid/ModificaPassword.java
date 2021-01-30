@@ -27,6 +27,14 @@ public class ModificaPassword extends AppCompatActivity {
         aggiornaPassword = findViewById(R.id.aggiornaPassword);
         home = findViewById(R.id.returnHome);
 
+        home.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ModificaPassword.this, Home_User.class);
+                startActivity(intent);
+            }});
+
+
         utente = new Utente();
 
         aggiornaPassword.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +66,7 @@ public class ModificaPassword extends AppCompatActivity {
             setpassword.setError(null);
         }
         if (setpassword.getText().toString().equals(password.toString())) {
-            setpassword.setError("Le password inserite sono diverse");
+            setpassword.setError("Inserire una nuova password");
         } else {
             setpassword.setError(null);
         }

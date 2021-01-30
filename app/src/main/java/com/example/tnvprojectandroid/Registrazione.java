@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Registrazione extends AppCompatActivity {
 
-    TextView username,password,passwordConfermata,cittaDiProvenienza,dataDiNascita;
+    EditText username,password,passwordConfermata,cittaDiProvenienza,dataDiNascita;
     Utente utente;
     Button registazioneButton;
     public final static String packag="com.example.tnvprojectandroid.Utente";
@@ -35,7 +36,7 @@ public class Registrazione extends AppCompatActivity {
             public void onClick(View v) {
                 if (controlloInserimento()) {
                     inizializzaAttributi();
-                    Intent passaggioTraActvity = new Intent(Registrazione.this, MainLogin.class);
+                    Intent passaggioTraActvity = new Intent(Registrazione.this, Home_User.class);
                     passaggioTraActvity.putExtra(packag, utente);
                     startActivity(passaggioTraActvity);
 

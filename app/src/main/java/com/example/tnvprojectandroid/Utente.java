@@ -5,17 +5,26 @@ import java.io.Serializable;
 public class Utente implements Serializable {
 
     private String username,password,cittaDiProvenienza,dataDiNascita;
+    private Boolean admin;
 
 
-
-    public Utente(String username, String password,String cittaDiProvenienza, String dataDiNascita) {
+    public Utente(String username, String password, String cittaDiProvenienza, String dataDiNascita, Boolean admin) {
         this.username = username;
         this.password = password;
         this.cittaDiProvenienza = cittaDiProvenienza;
         this.dataDiNascita = dataDiNascita;
+        this.admin = admin;
     }
 
     public Utente() {
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 
     public String getUsername() {
