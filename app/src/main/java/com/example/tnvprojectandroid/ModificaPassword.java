@@ -10,70 +10,66 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ModificaPassword extends AppCompatActivity {
-    TextView nome,password;
-    EditText setpassword,setpassword2;
+    TextView nome, password;
+    EditText setpassword, setConfermaPassword;
     Utente utente;
-    Button home,aggiornaPassword;
-    public final static String MP_Package="com.example.progettoandroid.Utente";
+    Button home, aggiornaPassword;
+    public final static String MP_Package = "com.example.com.example.tnvprojectandroid.Utente";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifica_password);
-        nome=findViewById(R.id.utenteModificaPassword);
-        password=findViewById(R.id.passwordModificapassword);
-        setpassword=findViewById(R.id.setpassword);
-        setpassword2=findViewById(R.id.repitepassword);
-        aggiornaPassword=findViewById(R.id.aggiornaPassword);
-        home=findViewById(R.id.returnHome);
+        nome = findViewById(R.id.utenteModificaPassword);
+        password = findViewById(R.id.passwordModificapassword);
+        setpassword = findViewById(R.id.setpassword);
+        setConfermaPassword = findViewById(R.id.repitepassword);
+        aggiornaPassword = findViewById(R.id.aggiornaPassword);
+        home = findViewById(R.id.returnHome);
 
-        utente=new Utente();
+        utente = new Utente();
 
-        private boolean chekInput(){
-            if (setpassword.getText().length()==0){
-                setpassword.setError("Inserire una password!");}
-            else { setpassword.setError(null);
-                if(setpassword2.getText().length()==0){
-                    setpassword.setError("Inserire una password!");}
-                else { setpassword.setError(null);}
-                if (setpassword.getText().toString().equals(setpassword2.getText().toString())){
-                    setpassword.setError("Le password inserite sono diverse");}
-                else { setpassword.setError(null);}
-                return false;
+        aggiornaPassword.setOnClickListener(new View.OnClickListener() {
 
 
+            @Override
+            public void onClick(View v) {
 
+                if (chekInput()) {
+                    utente.setPassword(setpassword.getText().toString());
+                    Intent showResult = new Intent(ModificaPassword.this, Utente.class);
+                    showResult.putExtra(MP_Package, utente);
+                    startActivity(showResult);
+                }
+            }
+        });
 
+    }
 
-
-                aggiornaPassword.setOnClickListener(new View.OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View v) {
-                        boolean validPassword= chekInput();
-
-                        if(validPassword){ utente.setPassWord(setpassword.getText().toString());
-                            Intent showResult = new Intent(Modifica_Password.this, Utente.class);
-                            showResult.putExtra(MP_Package, utente);
-                            startActivity(showResult);
-                        }});
-
-                    private boolean chekInput(){
-
-
-                        if (setpassword.getText().length()==0){
-                            setpassword.setError("Inserire una password!");}
-                        else { setpassword.setError(null);
-                            if(setpassword2.getText().length()==0){
-                                setpassword.setError("Inserire una password!");}
-                            else { setpassword.setError(null);}
-                            if (setpassword.getText().toString().equals(setpassword2.getText().toString())){
-                                setpassword.setError("Le password inserite sono diverse");}
-                            else { setpassword.setError(null);}
-                            return false;
-
-                        }
-                    }
+    public boolean chekInput() {
+        if (setpassword.getText().length() == 0) {
+            setpassword.setError("Inserire una password!");
+        } else {
+            setpassword.setError(null);
+        }
+        if (setConfermaPassword.getText().length() == 0) {
+            setpassword.setError("Inserire una password!");
+        } else {
+            setpassword.setError(null);
+        }
+        if (setpassword.getText().toString().equals(password.toString())) {
+            setpassword.setError("Le password inserite sono diverse");
+        } else {
+            setpassword.setError(null);
+        }
+        if (setpassword.getText().toString().equals(setConfermaPassword.getText().toString())) {
+            setpassword.setError("Le password inserite sono diverse");
+        } else {
+            setpassword.setError(null);
+        }
+        return true;
     }
 }
+
+
+
