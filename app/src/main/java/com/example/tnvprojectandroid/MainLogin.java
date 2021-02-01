@@ -12,48 +12,61 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.tnvprojectandroid.Registrazione.packag;
 
 public class MainLogin extends AppCompatActivity {
-
-    EditText username,password;
-    TextView usernameInserita,passwordInserita,passwordConfermataInserita,cittaInserita,dataInserita;
+    // come consigliato da Vittoria si istanzia l'arrayList come segue. verrà poi popolato su Registrazione
+    public static ArrayList<Utente> utenti = new ArrayList<>();
+    EditText username, password;
+    //   TextView usernameInserita,passwordInserita,passwordConfermataInserita,cittaInserita,dataInserita;
     Button accedi;
     TextView nuovaRegistrazione;
     Utente utente;
-    ListView listaUtenti;
+    //   ListView listaUtenti;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username=findViewById(R.id.username);
-        password=findViewById(R.id.password);
-        accedi=findViewById(R.id.accediButton);
-        nuovaRegistrazione=findViewById(R.id.nuovaRegistrazione);
-      //  listaUtenti=findViewById(R.id.lista_utenti);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        accedi = findViewById(R.id.accediButton);
+        nuovaRegistrazione = findViewById(R.id.nuovaRegistrazione);
 
-     //   ArrayList<Utente> listaUtentiInseriti= new ArrayList<>();
+        Utente primoutente = new Utente("admin", "admin", "admincity", "11/12/15", true);
 
-    //   utente =new Utente("admin","admin","carpineto romano","15/06/1993");
+        utenti.add(primoutente);
 
-      // listaUtentiInseriti.add(utente);
 
         accedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           //     if(controlloInserimento()) {
-                    Intent passaggioTraActivity=new Intent(MainLogin.this,Home_User.class);
-                 //   passaggioTraActivity.putExtra(packag, utente);
-                    startActivity(passaggioTraActivity);
+                if (controlloInserimento()) {
+                  int i= index(username.getText().toString(),password.getText().toString());
+                  utente=utenti.get(i);
+             // la condizione che segue funziona, se si prova a cambiare l'admin da true a false, accede alle differenti home_page
+              // il
+                   if (utente.getAdmin()) {
+                        Intent passaggioTraActivity = new Intent(MainLogin.this, HomeAdmin.class);
+                        passaggioTraActivity.putExtra(packag, utente);
+                        startActivity(passaggioTraActivity);
+                    }
+                    else {
+                        Intent passaggioTraActivity = new Intent(MainLogin.this, Home_User.class);
+                        passaggioTraActivity.putExtra(packag, utente);
+                        startActivity(passaggioTraActivity);
+                    }
                 }
-          //  }
+
+
+            }
         });
 
 
-        nuovaRegistrazione.setOnClickListener(new View.OnClickListener(){
+        nuovaRegistrazione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent passaggioTraActvity = new Intent(MainLogin.this, Registrazione.class);
@@ -62,66 +75,49 @@ public class MainLogin extends AppCompatActivity {
 
         });
 
-        Intent intent=getIntent();
-        Serializable object=intent.getSerializableExtra(packag);
 
-        usernameInserita=findViewById(R.id.usernameInserito);
-        passwordInserita=findViewById(R.id.passwordInserita);
-        passwordConfermataInserita=findViewById(R.id.passwordConfermataInserita);
-        cittaInserita=findViewById(R.id.cittaDiProvenienzaInserita);
-        dataInserita=findViewById(R.id.dataDiNascitaInserita);
-
-
-        if(object instanceof Utente) {
+   /*     Intent intent = getIntent();
+        Serializable object = intent.getSerializableExtra(packag);
+        if (object instanceof Utente) {
             utente = (Utente) object;
-        }else {
+        } else {
             utente = new Utente();
         }
-/*
-        usernameInserita.setText(utente.getUsername());
-        passwordInserita.setText(utente.getPassword());
-        cittaInserita.setText(utente.getCittaDiProvenienza());
-        dataInserita.setText(utente.getDataDiNascita());
-*/
+      //  MainLogin.utenti.add(utente);*/
+
     }
 
+    private boolean controlloInserimento() {
+        int errors = 0;
 
-    private boolean controlloInserimento(){
-        int errors=0;
-
-        if(username.getText().toString().length()==0){
-            username.setText("Inserire username");
+        if (username.getText().toString().length() == 0) {
+            username.setError("Inserire username");
             errors++;
-        }else{
+
+        } else {
             username.setError(null);
         }
-        if(password.getText().toString().length()==0){
-            password.setText("Inserire password");
+        if (password.getText().toString().length() == 0) {
+            password.setError("Inserire password");
             errors++;
-        }else{
+
+        } else {
             password.setError(null);
         }
 
-        return errors==0;
+        return errors == 0;
 
     }
-/*
-    public void updatePOI() throws IllegalArgumentException{
-        this.utente.setUsername(usernameInserita.getText().toString());
-        this.poi.setDescrizione(descrizione.getText().toString());
 
-        Coordinata coordinata=new Coordinata(
-                Double.parseDouble(this.latitudine.getText().toString()),
-                Double.parseDouble(this.longitudine.getText().toString()),
-                Double.parseDouble(this.altitudineNumber.getText().toString())
-                // Double.parseDouble(this.altitudine.getText().toString())
-        );
+    private int index(String nome, String password) {
 
-        this.poi.setCoordinata(coordinata);
-
-       //  this.poi.setCategoria(Categoria.valueOf(categoria.getText().toString()));
-
+        for (int i=0; i< utenti.size();i++) {
+            if (utente.getUsername().equals(nome)) {
+                if (utente.getPassword().equals(password)){
+                    return i;
+                }
+            }
+        }
+        return 0;
     }
-    */
-
 }

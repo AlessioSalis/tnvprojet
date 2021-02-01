@@ -56,33 +56,39 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:id="@+id/password"
             android:hint="es. password"/>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="56dp"/>
+            android:layout_height="60dp"/>
 
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_gravity="center"
             android:backgroundTint="@color/green"
             android:text="ACCEDI"
+            android:textSize="20dp"
+
             android:id="@+id/accediButton"/>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="56dp"/>
+            android:layout_height="60dp"/>
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:text="Nuovo utente ? Registrati"
+            android:text="Nuovo utente? Registrati"
             android:id="@+id/nuovaRegistrazione"
-            android:textSize="26dp"
+            android:textSize="20dp"
             android:textColor="@color/blue"/>
 
         <ListView

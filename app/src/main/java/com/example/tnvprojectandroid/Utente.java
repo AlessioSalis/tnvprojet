@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Utente implements Serializable {
 
     private String username,password,cittaDiProvenienza,dataDiNascita;
-    private Boolean admin;
+    private Boolean admin=false;
 
 
     public Utente(String username, String password, String cittaDiProvenienza, String dataDiNascita, Boolean admin) {

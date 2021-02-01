@@ -9,17 +9,23 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
+
+import static com.example.tnvprojectandroid.Registrazione.packag;
+
 public class ModificaPassword extends AppCompatActivity {
-    TextView nome, password;
+    TextView nome, password,errore;
     EditText setpassword, setConfermaPassword;
     Utente utente;
     Button home, aggiornaPassword;
-    public final static String MP_Package = "com.example.com.example.tnvprojectandroid.Utente";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifica_password);
+
+        errore= findViewById(R.id.errore);
         nome = findViewById(R.id.utenteModificaPassword);
         password = findViewById(R.id.passwordModificapassword);
         setpassword = findViewById(R.id.setpassword);
@@ -31,51 +37,63 @@ public class ModificaPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ModificaPassword.this, Home_User.class);
+                intent.putExtra(packag,utente);
                 startActivity(intent);
             }});
 
 
-        utente = new Utente();
+        Intent intent = getIntent();
+        Serializable object = intent.getSerializableExtra(packag);
+
+        if (object instanceof Utente) {
+            utente = (Utente) object;
+        } else {
+            utente = new Utente();
+        }
+        nome.setText(utente.getUsername());
+        password.setText(utente.getPassword());
 
         aggiornaPassword.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View v) {
+                boolean okChange = chekInput();
 
-                if (chekInput()) {
+                if (okChange) {
                     utente.setPassword(setpassword.getText().toString());
-                    Intent showResult = new Intent(ModificaPassword.this, Utente.class);
-                    showResult.putExtra(MP_Package, utente);
+                    Intent showResult = new Intent(ModificaPassword.this, Home_User.class);
+                    showResult.putExtra(packag,utente);
                     startActivity(showResult);
                 }
+                else {return;}
+
             }
         });
 
     }
 
-    public boolean chekInput() {
-        if (setpassword.getText().length() == 0) {
-            setpassword.setError("Inserire una password!");
-        } else {
-            setpassword.setError(null);
+    private boolean chekInput() {
+       int errore=0;
+
+        if (setpassword.getText().toString().length() == 0) {
+            setpassword.setError("Inserire la password");
+            errore++;
+
         }
-        if (setConfermaPassword.getText().length() == 0) {
-            setpassword.setError("Inserire una password!");
-        } else {
-            setpassword.setError(null);
-        }
+        else{setpassword.setError(null);}
         if (setpassword.getText().toString().equals(password.toString())) {
-            setpassword.setError("Inserire una nuova password");
-        } else {
-            setpassword.setError(null);
+            setpassword.setError("La password inserita non è valida");
+            errore++;
         }
-        if (setpassword.getText().toString().equals(setConfermaPassword.getText().toString())) {
-            setpassword.setError("Le password inserite sono diverse");
-        } else {
-            setpassword.setError(null);
+        else{setpassword.setError(null);}
+        if (!(setpassword.getText().toString().equals(setConfermaPassword.getText().toString()))) {
+            setConfermaPassword.setError("Le password inserite sono differenti");
+            errore++;
         }
-        return true;
+        else{setConfermaPassword.setError(null);}
+
+        return errore==0;
     }
 }
 

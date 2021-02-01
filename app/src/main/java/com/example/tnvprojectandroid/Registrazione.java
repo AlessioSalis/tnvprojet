@@ -9,13 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Registrazione extends AppCompatActivity {
 
     EditText username,password,passwordConfermata,cittaDiProvenienza,dataDiNascita;
     Utente utente;
     Button registazioneButton;
     public final static String packag="com.example.tnvprojectandroid.Utente";
-
+   // public List<Utente> utenti= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +32,23 @@ public class Registrazione extends AppCompatActivity {
         dataDiNascita=findViewById(R.id.dataDiNascitaInserita);
         registazioneButton=findViewById(R.id.registrazioneButton);
 
-        utente =new Utente();
+   /*     Utente primoutente =new Utente("admin","admin","cagliari","11/12/15",true);
 
+  utenti.add(primoutente);*/
+        Utente utente= new Utente();
         registazioneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (controlloInserimento()) {
-                    inizializzaAttributi();
-                    Intent passaggioTraActvity = new Intent(Registrazione.this, Home_User.class);
-                    passaggioTraActvity.putExtra(packag, utente);
+              if (controlloInserimento()) {
+                  inizializzaAttributi();
+                MainLogin.utenti.add(utente);
+                    Intent passaggioTraActvity = new Intent(Registrazione.this, MainLogin.class);
+              //con l'arrayList static, possiamo recuperare i dati dove vogliamo senza usare la putExtra
+               //     passaggioTraActvity.putExtra(packag, utente);
                     startActivity(passaggioTraActvity);
 
-                }
+               }
+
             }
         });
 
@@ -49,53 +57,62 @@ public class Registrazione extends AppCompatActivity {
     }
 
 
-    private void inizializzaAttributi()throws IllegalArgumentException{
+    private Utente inizializzaAttributi(){
         this.utente.setUsername(username.getText().toString());
         this.utente.setPassword(password.getText().toString());
         this.utente.setPassword(passwordConfermata.getText().toString());
         this.utente.setCittaDiProvenienza(cittaDiProvenienza.getText().toString());
         this.utente.setDataDiNascita(dataDiNascita.getText().toString());
+        return utente;
     }
 
 
-    private boolean controlloInserimento(){
-        int errors=0;
 
-        if(username.getText().toString().length()==0){
-            username.setText("Inserire username");
+    private boolean controlloInserimento() {
+        int errors = 0;
+
+        if (username.getText().toString().length() == 0) {
+            username.setError("Inserire username");
             errors++;
-        }else{
+
+        } else {
             username.setError(null);
         }
-        if(password.getText().toString().length()==0){
-            password.setText("Inserire password");
+        if (password.getText().toString().length() == 0) {
+            password.setError("Inserire password");
             errors++;
-        }else{
+
+        } else {
             password.setError(null);
         }
 
-        if(passwordConfermata.getText().toString().length()==0 && passwordConfermata.equals(password)){
-            passwordConfermata.setText("Conferma password");
+        if (passwordConfermata.getText().toString().length() == 0 && passwordConfermata.equals(password)) {
+            passwordConfermata.setError("Conferma password");
             errors++;
-        }else{
+
+        } else {
             passwordConfermata.setError(null);
         }
 
-        if(cittaDiProvenienza.getText().toString().length()==0){
-            cittaDiProvenienza.setText("Inserire citta di provenienza");
+        if (cittaDiProvenienza.getText().toString().length() == 0) {
+            cittaDiProvenienza.setError("Inserire citta di provenienza");
             errors++;
-        }else{
+
+        } else {
             cittaDiProvenienza.setError(null);
         }
 
-        if(dataDiNascita.getText().toString().length()==0){
-            dataDiNascita.setText("Inserire data di nascita");
+        if (dataDiNascita.getText().toString().length() == 0) {
+            dataDiNascita.setError("Inserire data di nascita");
             errors++;
-        }else{
+
+        } else {
             dataDiNascita.setError(null);
         }
 
         return errors==0;
 
     }
+
+
 }
