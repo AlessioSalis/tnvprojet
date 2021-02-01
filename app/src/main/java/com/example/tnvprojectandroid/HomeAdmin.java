@@ -32,6 +32,15 @@ public class HomeAdmin extends AppCompatActivity {
         gestisciUtenti = findViewById(R.id.gestisciUtentiAdmin);
 
 
+        gestisciUtenti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent gestisci = new Intent( HomeAdmin.this, GestioneUtenti.class);
+                gestisci.putExtra(packag,utente);
+                startActivity(gestisci);
+            }
+        });
 
 
 

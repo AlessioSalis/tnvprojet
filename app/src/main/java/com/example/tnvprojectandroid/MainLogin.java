@@ -20,11 +20,9 @@ public class MainLogin extends AppCompatActivity {
 
     public static ArrayList<Utente> utenti = new ArrayList<>();
     EditText username, password;
-    //   TextView usernameInserita,passwordInserita,passwordConfermataInserita,cittaInserita,dataInserita;
     Button accedi;
     TextView nuovaRegistrazione;
     Utente utente;
-    //   ListView listaUtenti;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,7 @@ public class MainLogin extends AppCompatActivity {
         accedi = findViewById(R.id.accediButton);
         nuovaRegistrazione = findViewById(R.id.nuovaRegistrazione);
 
-        Utente primoutente = new Utente("admin", "admin", "admincity", "11/12/15", true);
+        Utente primoutente = new Utente("admin", "admin", "admincity", "11/09/2001", true);
 
         utenti.add(primoutente);
 
@@ -73,18 +71,7 @@ public class MainLogin extends AppCompatActivity {
             }
 
         });
-
-
-   /*     Intent intent = getIntent();
-        Serializable object = intent.getSerializableExtra(packag);
-        if (object instanceof Utente) {
-            utente = (Utente) object;
-        } else {
-            utente = new Utente();
-        }
-      //  MainLogin.utenti.add(utente);*/
-
-    }
+            }
 
     private boolean controlloInserimento() {
         int errors = 0;

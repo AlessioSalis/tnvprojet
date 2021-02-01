@@ -61,14 +61,18 @@ public class ModificaPassword extends AppCompatActivity {
                 boolean okChange = chekInput();
 
                 if (okChange) {
+                    if(!utente.getAdmin()){
                     utente.setPassword(setpassword.getText().toString());
                     Intent showResult = new Intent(ModificaPassword.this, Home_User.class);
                     showResult.putExtra(packag,utente);
-                    startActivity(showResult);
+                    startActivity(showResult);}
+                    else{utente.setPassword(setpassword.getText().toString());
+                        Intent showResult = new Intent(ModificaPassword.this, HomeAdmin.class);
+                        showResult.putExtra(packag,utente);
+                        startActivity(showResult);}
                 }
-                else {return;}
 
-            }
+                   }
         });
 
     }
@@ -82,7 +86,7 @@ public class ModificaPassword extends AppCompatActivity {
 
         }
         else{setpassword.setError(null);}
-        if (setpassword.getText().toString().equals(password.toString())) {
+        if (setpassword.getText().toString().equals(utente.getPassword())) {
             setpassword.setError("La password inserita non è valida");
             errore++;
         }
