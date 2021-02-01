@@ -17,7 +17,7 @@ import java.util.List;
 import static com.example.tnvprojectandroid.Registrazione.packag;
 
 public class MainLogin extends AppCompatActivity {
-    // come consigliato da Vittoria si istanzia l'arrayList come segue. verrà poi popolato su Registrazione
+
     public static ArrayList<Utente> utenti = new ArrayList<>();
     EditText username, password;
     //   TextView usernameInserita,passwordInserita,passwordConfermataInserita,cittaInserita,dataInserita;
@@ -47,8 +47,7 @@ public class MainLogin extends AppCompatActivity {
                 if (controlloInserimento()) {
                   int i= index(username.getText().toString(),password.getText().toString());
                   utente=utenti.get(i);
-             // la condizione che segue funziona, se si prova a cambiare l'admin da true a false, accede alle differenti home_page
-              // il
+
                    if (utente.getAdmin()) {
                         Intent passaggioTraActivity = new Intent(MainLogin.this, HomeAdmin.class);
                         passaggioTraActivity.putExtra(packag, utente);
@@ -109,14 +108,13 @@ public class MainLogin extends AppCompatActivity {
 
     }
 
-    private int index(String nome, String password) {
+   private int index(String nome, String password) {
 
         for (int i=0; i< utenti.size();i++) {
-            if (utente.getUsername().equals(nome)) {
-                if (utente.getPassword().equals(password)){
+            if (utenti.get(i).getUsername().equals(nome) && utenti.get(i).getPassword().equals(password))
+            {
                     return i;
                 }
-            }
         }
         return 0;
     }
