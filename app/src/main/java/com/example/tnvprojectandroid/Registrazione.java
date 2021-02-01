@@ -35,14 +35,13 @@ public class Registrazione extends AppCompatActivity {
    /*     Utente primoutente =new Utente("admin","admin","cagliari","11/12/15",true);
 
   utenti.add(primoutente);*/
-        Utente utente= new Utente();
+
         registazioneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               if (controlloInserimento()) {
-
                   inizializzaAttributi();
-                    Intent passaggioTraActvity = new Intent(Registrazione.this, MainLogin.class);
+                  Intent passaggioTraActvity = new Intent(Registrazione.this, MainLogin.class);
               //con l'arrayList static, possiamo recuperare i dati dove ci servono senza usare la putExtra
                //     passaggioTraActvity.putExtra(packag, utente);
                     startActivity(passaggioTraActvity);
@@ -58,14 +57,16 @@ public class Registrazione extends AppCompatActivity {
 
 
     private void inizializzaAttributi(){
-        this.utente.setUsername(username.getText().toString());
-        this.utente.setPassword(password.getText().toString());
-        this.utente.setPassword(passwordConfermata.getText().toString());
-        this.utente.setCittaDiProvenienza(cittaDiProvenienza.getText().toString());
-        this.utente.setDataDiNascita(dataDiNascita.getText().toString());
-        this.utente.setAdmin(false);
+        Utente utente= new Utente(
+                username.getText().toString(),
+                password.getText().toString(),
+                cittaDiProvenienza.getText().toString(),
+                dataDiNascita.getText().toString(),
+                false
+                );
         MainLogin.utenti.add(utente);
-    }
+
+           }
 
 
 
