@@ -90,6 +90,13 @@ public class MainLogin extends AppCompatActivity {
         } else {
             password.setError(null);
         }
+        if (index(username.getText().toString(),password.getText().toString()) == -1) {
+            password.setError("Utente non registrato");
+            errors++;
+
+        } else {
+            password.setError(null);
+        }
 
         return errors == 0;
 
@@ -103,6 +110,6 @@ public class MainLogin extends AppCompatActivity {
                     return i;
                 }
         }
-        return 0;
+        return -1;
     }
 }
